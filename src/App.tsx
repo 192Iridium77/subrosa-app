@@ -124,7 +124,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Subrosa - Stories under the rose
+            Subrosa Stories
           </Typography>
         </Toolbar>
       </AppBar>

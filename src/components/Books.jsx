@@ -2,6 +2,10 @@ import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { useNavigate } from "react-router-dom";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -14,71 +18,51 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const itemData = [
   {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    title: "Fern",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    title: "Mushrooms",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    title: "Tomato basil",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
-    title: "Sea star",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
-    title: "Bike",
+    id: "vincent-and-the-sea-dragon",
+    img: "https://images.unsplash.com/photo-1577493340887-b7bfff550145",
+    title: "Vincent and the Sea Dragon",
   },
 ];
 
 export default function Books() {
+  const navigate = useNavigate();
+  const navToBook = (bookId) => {
+    navigate(`/book/${bookId}`);
+  };
   return (
     <div className="flex flex-col w-full">
       <DrawerHeader />
       <div className="container">
-        hello
-        <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
-          <ImageList sx={{ width: "100%" }} cols={4} rowHeight={400}>
+        <Typography variant="h5" className="py-8">
+          Books
+        </Typography>
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, p: 0 }}
+          style={{ marginLeft: "-2rem", marginRight: "-2rem" }}
+        >
+          <ImageList sx={{ width: "100%" }} cols={4}>
             {itemData.map((item) => (
               <ImageListItem key={item.img}>
-                <img
-                  src={`${item.img}?w=400&h=400&fit=crop&auto=format`}
-                  srcSet={`${item.img}?w=400&h=400&fit=crop&auto=format&dpr=2 2x`}
-                  alt={item.title}
-                  loading="lazy"
-                />
+                <Card
+                  className="m-2 cursor-pointer"
+                  onClick={() => navToBook(item.id)}
+                >
+                  <CardContent>
+                    <img
+                      src={`${item.img}?w=400&h=600&fit=crop&auto=format`}
+                      srcSet={`${item.img}?w=400&h=600&fit=crop&auto=format&dpr=2 2x`}
+                      alt={item.title}
+                      loading="lazy"
+                    />
+                    <Typography variant="subtitle2" className="pt-4">
+                      Vincent and the Sea Dragons
+                    </Typography>
+                    <Typography variant="body2" className="pt-2">
+                      Matt Martin
+                    </Typography>
+                  </CardContent>
+                </Card>
               </ImageListItem>
             ))}
           </ImageList>
