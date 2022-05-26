@@ -1,4 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import HTMLFlipBook from "react-pageflip";
 
 const seaDragonStory = {
   pages: [
@@ -94,49 +96,95 @@ const seaDragonStory = {
   ],
 };
 
-export default function BookViewer() {
-  const [page, setPage] = useState(0);
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
 
+export default function MyBook(props) {
+  const Page = React.forwardRef((props, ref) => {
+    return (
+      <div className="p-4 bg-gray-100" ref={ref}>
+        <h1>Page Header</h1>
+        <p>{props.children}</p>
+        <p>Page number: {props.number}</p>
+      </div>
+    );
+  });
   return (
-    <div className="py-20 bg-gray-200 h-full">
-      <div className="flex h-full bg-white justify-between items-center divide-x-4 divide-gray-200 container">
-        <div
-          className="flex justify-center h-full whitespace-pre-line p-8"
-          style={{ width: "50%" }}
+    <div className="w-full mt-12">
+      <DrawerHeader></DrawerHeader>
+      <div className="container">
+        <HTMLFlipBook
+          width={1000}
+          height={1200}
+          size="stretch"
+          minWidth={315}
+          maxWidth={1000}
+          minHeight={400}
+          maxHeight={1533}
+          maxShadowOpacity={0.5}
+          showCover={true}
+          mobileScrollSupport={true}
+          className="demo-book"
         >
-          <div>{seaDragonStory.pages[page * 2].text}</div>
-          {(page + 1) * 2 > 2 && (
-            <button
-              className="bg-blue-400 px-4 py-2 absolute"
-              style={{
-                left: "40px",
-                top: "48%",
-              }}
-              onClick={() => setPage(page - 1)}
-            >
-              Back
-            </button>
-          )}
-        </div>
-        <div
-          className="flex justify-center h-full whitespace-pre-line p-8"
-          style={{ width: "50%" }}
-        >
-          <div>{seaDragonStory.pages[page * 2 + 1].text}</div>
-          {(page + 1) * 2 < seaDragonStory.pages.length && (
-            <button
-              className="bg-blue-400 px-4 py-2 absolute"
-              style={{
-                right: "40px",
-                top: "48%",
-              }}
-              onClick={() => setPage(page + 1)}
-            >
-              Next
-            </button>
-          )}
-        </div>
+          <Page number="1">Page text</Page>
+          <Page number="2">Page text</Page>
+          <Page number="3">Page text</Page>
+          <Page number="4">Page text</Page>
+        </HTMLFlipBook>
       </div>
     </div>
   );
 }
+
+// export default function BookViewer() {
+//   const [page, setPage] = useState(0);
+
+//   return (
+//     <div className="py-20 bg-gray-200 h-full">
+//       <div className="flex h-full bg-white justify-between items-center divide-x-4 divide-gray-200 container">
+//         <div
+//           className="flex justify-center h-full whitespace-pre-line p-8"
+//           style={{ width: "50%" }}
+//         >
+//           <div>{seaDragonStory.pages[page * 2].text}</div>
+//           {(page + 1) * 2 > 2 && (
+//             <button
+//               className="bg-blue-400 px-4 py-2 absolute"
+//               style={{
+//                 left: "40px",
+//                 top: "48%",
+//               }}
+//               onClick={() => setPage(page - 1)}
+//             >
+//               Back
+//             </button>
+//           )}
+//         </div>
+//         <div
+//           className="flex justify-center h-full whitespace-pre-line p-8"
+//           style={{ width: "50%" }}
+//         >
+//           <div>{seaDragonStory.pages[page * 2 + 1].text}</div>
+//           {(page + 1) * 2 < seaDragonStory.pages.length && (
+//             <button
+//               className="bg-blue-400 px-4 py-2 absolute"
+//               style={{
+//                 right: "40px",
+//                 top: "48%",
+//               }}
+//               onClick={() => setPage(page + 1)}
+//             >
+//               Next
+//             </button>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }

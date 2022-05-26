@@ -2,6 +2,7 @@ import * as React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
 import Books from "./components/Books";
+import BookViewer from "./components/BookViewer";
 
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -184,7 +185,7 @@ export default function MiniDrawer() {
       </Drawer>
       <Routes>
         <Route path="/" element={<Books />} />
-        {/* <Route path="about" element={<About />} /> */}
+        <Route path="/book/:bookId" element={<BookViewer />} />
       </Routes>
     </Box>
   );
