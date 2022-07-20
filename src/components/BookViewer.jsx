@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import React, { useRef } from "react";
+import { styled } from "@mui/material/styles";
 import HTMLFlipBook from "react-pageflip";
 
 const seaDragonStory = {
@@ -105,38 +105,46 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-export default function MyBook(props) {
+export default function MyBook() {
+  const book = useRef();
+
   const Page = React.forwardRef((props, ref) => {
     return (
-      <div className="p-4 bg-gray-100" ref={ref}>
-        <h1>Page Header</h1>
+      <div className="p-4 border-2 border-gray-100" ref={ref}>
         <p>{props.children}</p>
-        <p>Page number: {props.number}</p>
       </div>
     );
   });
+
   return (
-    <div className="w-full mt-12">
+    <div className="w-full my-12">
       <DrawerHeader></DrawerHeader>
       <div className="container">
         <HTMLFlipBook
           width={1000}
-          height={1200}
+          height={1000}
           size="stretch"
+          drawShadow
           minWidth={315}
           maxWidth={1000}
           minHeight={400}
           maxHeight={1533}
-          maxShadowOpacity={0.5}
+          maxShadowOpacity={0.1}
           showCover={true}
           mobileScrollSupport={true}
           className="demo-book"
+          ref={book}
         >
-          <Page number="1">Page text</Page>
-          <Page number="2">Page text</Page>
-          <Page number="3">Page text</Page>
-          <Page number="4">Page text</Page>
+          <Page>Title</Page>
+          {seaDragonStory.pages.map((page, index) => (
+            <Page key={index} number={index}>
+              {page.text}
+            </Page>
+          ))}
         </HTMLFlipBook>
+        <button onClick={() => book.current.pageFlip().flipNext()}>
+          Next page
+        </button>
       </div>
     </div>
   );
