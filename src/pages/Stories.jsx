@@ -7,6 +7,14 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useNavigate } from "react-router-dom";
 
+const itemData = [
+  {
+    id: "vincent-and-the-sea-dragon",
+    img: "https://images.unsplash.com/photo-1577493340887-b7bfff550145",
+    title: "Vincent and the Sea Dragon",
+  },
+];
+
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -16,15 +24,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const itemData = [
-  {
-    id: "vincent-and-the-sea-dragon",
-    img: "https://images.unsplash.com/photo-1577493340887-b7bfff550145",
-    title: "Vincent and the Sea Dragon",
-  },
-];
-
-export default function Books() {
+export default function Stories() {
   const navigate = useNavigate();
   const navToBook = (bookId) => {
     navigate(`/book/${bookId}`);

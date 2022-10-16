@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { styled } from "@mui/material/styles";
 import HTMLFlipBook from "react-pageflip";
+import Button from "@mui/material/Button";
 
 const seaDragonStory = {
   pages: [
@@ -105,12 +106,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-export default function MyBook() {
+export default function Story() {
   const book = useRef();
 
   const Page = React.forwardRef((props, ref) => {
     return (
-      <div className="p-4 border-2 border-gray-100" ref={ref}>
+      <div className="h-full p-4 border-2 border-gray-100" ref={ref}>
         <p>{props.children}</p>
       </div>
     );
@@ -122,13 +123,13 @@ export default function MyBook() {
       <div className="container">
         <HTMLFlipBook
           width={1000}
-          height={1000}
+          height={1200}
           size="stretch"
           drawShadow
           minWidth={315}
           maxWidth={1000}
           minHeight={400}
-          maxHeight={1533}
+          maxHeight={1200}
           maxShadowOpacity={0.1}
           showCover={true}
           mobileScrollSupport={true}
@@ -142,57 +143,15 @@ export default function MyBook() {
             </Page>
           ))}
         </HTMLFlipBook>
-        <button onClick={() => book.current.pageFlip().flipNext()}>
-          Next page
-        </button>
+        <div className="flex justify-between p-4">
+          <Button onClick={() => book.current.pageFlip().turnToPrevPage()}>
+            Previous page
+          </Button>
+          <Button onClick={() => book.current.pageFlip().turnToNextPage()}>
+            Next page
+          </Button>
+        </div>
       </div>
     </div>
   );
 }
-
-// export default function BookViewer() {
-//   const [page, setPage] = useState(0);
-
-//   return (
-//     <div className="py-20 bg-gray-200 h-full">
-//       <div className="flex h-full bg-white justify-between items-center divide-x-4 divide-gray-200 container">
-//         <div
-//           className="flex justify-center h-full whitespace-pre-line p-8"
-//           style={{ width: "50%" }}
-//         >
-//           <div>{seaDragonStory.pages[page * 2].text}</div>
-//           {(page + 1) * 2 > 2 && (
-//             <button
-//               className="bg-blue-400 px-4 py-2 absolute"
-//               style={{
-//                 left: "40px",
-//                 top: "48%",
-//               }}
-//               onClick={() => setPage(page - 1)}
-//             >
-//               Back
-//             </button>
-//           )}
-//         </div>
-//         <div
-//           className="flex justify-center h-full whitespace-pre-line p-8"
-//           style={{ width: "50%" }}
-//         >
-//           <div>{seaDragonStory.pages[page * 2 + 1].text}</div>
-//           {(page + 1) * 2 < seaDragonStory.pages.length && (
-//             <button
-//               className="bg-blue-400 px-4 py-2 absolute"
-//               style={{
-//                 right: "40px",
-//                 top: "48%",
-//               }}
-//               onClick={() => setPage(page + 1)}
-//             >
-//               Next
-//             </button>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
