@@ -9,8 +9,17 @@ let baseTheme = createTheme({
     },
     secondary: {
       main: grey[800],
+      light: "#fff",
     },
   },
 });
 
-export { baseTheme };
+let menuTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#fff",
+    },
+  },
+});
+
+export { baseTheme, menuTheme };

@@ -2,9 +2,9 @@ import * as React from "react";
 import Drawer from "./Drawer";
 import Toolbar from "./Toolbar";
 
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
+import { styled, ThemeProvider } from "@mui/material/styles";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import { menuTheme } from "../../themes";
 
 const drawerWidth = 240;
 
@@ -42,8 +42,8 @@ export default function Navigation() {
   };
 
   return (
-    <>
-      <AppBar position="fixed" open={open} color="transparent">
+    <ThemeProvider theme={menuTheme}>
+      <AppBar position="fixed" open={open}>
         <Toolbar open={open} handleDrawerOpen={handleDrawerOpen} />
       </AppBar>
       <Drawer
@@ -52,6 +52,6 @@ export default function Navigation() {
         handleDrawerOpen={handleDrawerOpen}
         handleDrawerClose={handleDrawerClose}
       />
-    </>
+    </ThemeProvider>
   );
 }

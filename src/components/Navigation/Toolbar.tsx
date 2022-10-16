@@ -1,5 +1,6 @@
 import { Toolbar as MuiToolbar, IconButton, Typography } from "@mui/material";
 import { Menu } from "@mui/icons-material";
+import Image from "mui-image";
 
 interface ToolbarProps {
   open: boolean;
@@ -21,6 +22,7 @@ export default function Toolbar({ open, handleDrawerOpen }: ToolbarProps) {
       >
         <Menu />
       </IconButton>
+      <Image src="Rose.png" width={50} />
       <Typography variant="h6" noWrap component="div" sx={{ color: "black" }}>
         {process.env.REACT_APP_TITLE}
       </Typography>

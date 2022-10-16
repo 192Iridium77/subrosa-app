@@ -1,17 +1,18 @@
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import { Card, CardContent, CardMedia, CardHeader } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const itemData = [
   {
     id: "vincent-and-the-sea-dragon",
-    img: "https://images.unsplash.com/photo-1577493340887-b7bfff550145",
+    img: "./VincentAndTheSeaDragonCover.png",
     title: "Vincent and the Sea Dragon",
+    description:
+      "Vincent gets pushed out to sea by his so-called friend and becomes tangled in the mystery of the sea dragons.",
   },
 ];
 
@@ -33,7 +34,11 @@ export default function Stories() {
     <div className="flex flex-col w-full">
       <DrawerHeader />
       <div className="container">
-        <Typography variant="h5" className="py-8">
+        <Typography
+          variant="h5"
+          sx={{ p: 1 }}
+          style={{ marginLeft: "-2rem", marginRight: "-2rem" }}
+        >
           Books
         </Typography>
         <Box
@@ -41,25 +46,22 @@ export default function Stories() {
           sx={{ flexGrow: 1, p: 0 }}
           style={{ marginLeft: "-2rem", marginRight: "-2rem" }}
         >
-          <ImageList sx={{ width: "100%" }} cols={4}>
+          <ImageList sx={{ width: "100%" }} cols={3}>
             {itemData.map((item) => (
               <ImageListItem key={item.img}>
                 <Card
                   className="m-2 cursor-pointer"
                   onClick={() => navToBook(item.id)}
+                  sx={{ boxShadow: 3, m: 1, cursor: "pointer" }}
                 >
+                  <CardHeader
+                    title="Vincent and the Sea Dragons"
+                    subheader="by Matt Martin"
+                  ></CardHeader>
+                  <CardMedia component="img" image={item.img} alt={item.alt} />
                   <CardContent>
-                    <img
-                      src={`${item.img}?w=400&h=600&fit=crop&auto=format`}
-                      srcSet={`${item.img}?w=400&h=600&fit=crop&auto=format&dpr=2 2x`}
-                      alt={item.title}
-                      loading="lazy"
-                    />
-                    <Typography variant="subtitle2" className="pt-4">
-                      Vincent and the Sea Dragons
-                    </Typography>
                     <Typography variant="body2" className="pt-2">
-                      Matt Martin
+                      {item.description}
                     </Typography>
                   </CardContent>
                 </Card>
