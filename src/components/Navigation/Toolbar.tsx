@@ -22,7 +22,7 @@ export default function Toolbar({ open, handleDrawerOpen }: ToolbarProps) {
       >
         <Menu />
       </IconButton>
-      <Image src="Rose.png" width={50} />
+      <Image src="/Rose.png" width={50} />
       <Typography variant="h6" noWrap component="div" sx={{ color: "black" }}>
         {process.env.REACT_APP_TITLE}
       </Typography>

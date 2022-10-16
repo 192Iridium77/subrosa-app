@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { styled } from "@mui/material/styles";
 import HTMLFlipBook from "react-pageflip";
-import Button from "@mui/material/Button";
+import { Button, Container, Box } from "@mui/material";
+import Image from "mui-image";
 
 const seaDragonStory = {
   pages: [
@@ -112,7 +113,17 @@ export default function Story() {
   const Page = React.forwardRef((props, ref) => {
     return (
       <div className="h-full p-4 border-2 border-gray-100" ref={ref}>
-        <p>{props.children}</p>
+        <Box sx={{ m: 2 }}>
+          <p>{props.children}</p>
+        </Box>
+      </div>
+    );
+  });
+
+  const PageCover = React.forwardRef((props, ref) => {
+    return (
+      <div className="page page-cover" ref={ref} data-density="hard">
+        {props.children}
       </div>
     );
   });
@@ -120,29 +131,35 @@ export default function Story() {
   return (
     <div className="w-full my-12">
       <DrawerHeader></DrawerHeader>
-      <div className="container">
-        <HTMLFlipBook
-          width={1000}
-          height={1200}
-          size="stretch"
-          drawShadow
-          minWidth={315}
-          maxWidth={1000}
-          minHeight={400}
-          maxHeight={1200}
-          maxShadowOpacity={0.1}
-          showCover={true}
-          mobileScrollSupport={true}
-          className="demo-book"
-          ref={book}
-        >
-          <Page>Title</Page>
-          {seaDragonStory.pages.map((page, index) => (
-            <Page key={index} number={index}>
-              {page.text}
-            </Page>
-          ))}
-        </HTMLFlipBook>
+      <Container>
+        <Box sx={{ bgcolor: "primary.main", px: 4, py: 1 }}>
+          <Box sx={{ boxShadow: 3 }} bgcolor="#ffffff">
+            <HTMLFlipBook
+              width={1000}
+              height={1200}
+              size="stretch"
+              drawShadow
+              minWidth={315}
+              maxWidth={1000}
+              minHeight={400}
+              maxHeight={1200}
+              maxShadowOpacity={0.1}
+              showCover={true}
+              mobileScrollSupport={true}
+              className="demo-book"
+              ref={book}
+            >
+              <PageCover>
+                <Image src="/VincentAndTheSeaDragonCover.png" />
+              </PageCover>
+              {seaDragonStory.pages.map((page, index) => (
+                <Page key={index} number={index}>
+                  {page.text}
+                </Page>
+              ))}
+            </HTMLFlipBook>
+          </Box>
+        </Box>
         <div className="flex justify-between p-4">
           <Button onClick={() => book.current.pageFlip().turnToPrevPage()}>
             Previous page
@@ -151,7 +168,7 @@ export default function Story() {
             Next page
           </Button>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }
