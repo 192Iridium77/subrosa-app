@@ -39,7 +39,7 @@ export default function Stories() {
           sx={{ p: 1 }}
           style={{ marginLeft: "-2rem", marginRight: "-2rem" }}
         >
-          Books
+          Stories
         </Typography>
         <Box
           component="main"
