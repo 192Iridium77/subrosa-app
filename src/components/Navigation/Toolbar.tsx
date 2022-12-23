@@ -22,8 +22,13 @@ export default function Toolbar({ open, handleDrawerOpen }: ToolbarProps) {
       >
         <Menu />
       </IconButton>
-      <Image src="/Rose.png" width={50} />
-      <Typography variant="h6" noWrap component="div" sx={{ color: "black" }}>
+      <Image src="/Rose.png" width={30} />
+      <Typography
+        variant="h6"
+        noWrap
+        component="div"
+        sx={{ color: "black", marginLeft: "10px" }}
+      >
         {process.env.REACT_APP_TITLE}
       </Typography>
     </MuiToolbar>

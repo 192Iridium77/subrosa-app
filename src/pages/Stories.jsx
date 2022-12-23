@@ -3,18 +3,9 @@ import Box from "@mui/material/Box";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import Typography from "@mui/material/Typography";
-import { Card, CardContent, CardMedia, CardHeader } from "@mui/material";
+import { Card, CardContent, CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
-const itemData = [
-  {
-    id: "vincent-and-the-sea-dragon",
-    img: "./VincentAndTheSeaDragonCover.png",
-    title: "Vincent and the Sea Dragon",
-    description:
-      "Vincent gets pushed out to sea by his so-called friend and becomes tangled in the mystery of the sea dragons.",
-  },
-];
+import stories from "../data/stories";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -47,21 +38,21 @@ export default function Stories() {
           style={{ marginLeft: "-2rem", marginRight: "-2rem" }}
         >
           <ImageList sx={{ width: "100%" }} cols={3}>
-            {itemData.map((item) => (
-              <ImageListItem key={item.img}>
+            {stories.map((story) => (
+              <ImageListItem key={story.img}>
                 <Card
                   className="m-2 cursor-pointer"
-                  onClick={() => navToBook(item.id)}
+                  onClick={() => navToBook(story.id)}
                   sx={{ boxShadow: 3, m: 1, cursor: "pointer" }}
                 >
-                  <CardHeader
-                    title="Vincent and the Sea Dragons"
-                    subheader="by Matt Martin"
-                  ></CardHeader>
-                  <CardMedia component="img" image={item.img} alt={item.alt} />
+                  <CardMedia
+                    component="img"
+                    image={story.img}
+                    alt={story.alt}
+                  />
                   <CardContent>
                     <Typography variant="body2" className="pt-2">
-                      {item.description}
+                      {story.description}
                     </Typography>
                   </CardContent>
                 </Card>
